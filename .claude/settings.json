@@ -1,0 +1,11 @@
+{
+  "env": {"FLEET_SETTINGS_PROBE": "repo-settings-20261010"},
+  "hooks": {
+    "SessionStart": [{
+      "hooks": [{
+        "type": "command",
+        "command": "mkdir -p .fleet/probes && printf '%s\\n' repo-hook-20261010 > .fleet/probes/session-start.txt"
+      }]
+    }]
+  }
+}
