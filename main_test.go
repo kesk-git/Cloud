@@ -2,8 +2,24 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"testing"
 )
+
+// failWriter rejects every write with a fixed error.
+type failWriter struct{ err error }
+
+func (w failWriter) Write([]byte) (int, error) { return 0, w.err }
+
+func TestRunReturnsWriterError(t *testing.T) {
+	sentinel := errors.New("sentinel write failure")
+	for _, args := range [][]string{{"--smoke"}, {"--smoke", "--name", "Scout"}} {
+		err := run(failWriter{err: sentinel}, args)
+		if !errors.Is(err, sentinel) {
+			t.Fatalf("%v: got %v, want writer error %v", args, err, sentinel)
+		}
+	}
+}
 
 func TestSmoke(t *testing.T) {
 	var out bytes.Buffer
