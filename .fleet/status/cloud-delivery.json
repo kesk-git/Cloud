@@ -1,8 +1,8 @@
 {
   "task_id": "cloud-delivery",
-  "status": "pr-open-autofix-watching",
-  "sequence": 5,
-  "updated_utc": "2026-10-10T12:18:21Z",
+  "status": "pr-open-autofix-fix-pushed",
+  "sequence": 6,
+  "updated_utc": "2026-10-10T12:20:29Z",
   "session_id": "session_01P699BXuFxHTwsewFQmAveY",
   "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
   "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
@@ -130,7 +130,32 @@
     "watching": ["failed checks", "review comments", "reviews", "CI status changes", "other PR events"],
     "repo_skills_checked": "no .claude/skills/steward or .claude/skills/babysit on the head branch; only delivery-probe exists",
     "posture": "idle until GitHub delivers an event; fixes will preserve the Actions gate assertions; no merge, no auto-merge, no account changes",
-    "events_received": []
+    "events_received": [
+      {
+        "kind": "subscription.created",
+        "received_utc": "2026-10-10T12:18:18Z",
+        "action": "read-only check via gh-axi REST: ubuntu green, windows/macos in progress, no comments; no push"
+      },
+      {
+        "kind": "check_suite.completed",
+        "received_utc": "2026-10-10T12:19:41Z",
+        "head_sha": "1e5e329742fa13a74140a976ccd36ef7b8568d1f",
+        "action": "verified via gh-axi REST: all three build-smoke jobs success; no push"
+      },
+      {
+        "kind": "check_run.completed",
+        "received_utc": "2026-10-10T12:19:55Z",
+        "check": "golden-smoke",
+        "check_run_id": 114211524097,
+        "conclusion": "failure",
+        "head_sha": "f4c4d972034c7d6430056babb4c7fb94d48c7c41",
+        "details_url": "https://github.com/kesk-git/Cloud/actions/runs/38051544644/job/114211524097",
+        "diagnosis": "observed: supervisor commit f4c4d97 'Exercise Auto-fix with deliberately incorrect smoke fixture' added .fleet/fixtures/smoke.txt containing 'cloud-stub: BROKEN' and .github/workflows/scout-contract.yml whose golden-smoke job diffs that fixture against 'go run . --smoke'. Reproduced locally: diff exit 1 with '-cloud-stub: BROKEN / +cloud-stub: ok'. Job logs could not be fetched (blob storage URL returned Forbidden through the proxy); diagnosis rests on the diff and local reproduction.",
+        "fix": "corrected .fleet/fixtures/smoke.txt to the documented golden contract 'cloud-stub: ok' (README and the cross-platform gate assert the same string). No workflow, gate assertion, or program output was changed. Local golden-smoke diff now exits 0.",
+        "validation": "gofmt clean, go vet pass, go test pass, go build pass, executable --smoke prints 'cloud-stub: ok', --smoke --name mac prints 'cloud-stub: ok (mac)'; .github unchanged",
+        "re_run": "not needed: fix pushed as a new commit, which triggers both workflows"
+      }
+    ]
   },
   "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus status updates; PR #1 open against main; session subscribed to PR events",
   "blockers": [],
