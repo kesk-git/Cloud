@@ -1,8 +1,8 @@
 {
   "task_id": "cloud-delivery",
-  "status": "blocked-on-pr-creation",
-  "sequence": 3,
-  "updated_utc": "2026-10-10T12:13:23Z",
+  "status": "pr-open-awaiting-supervisor",
+  "sequence": 4,
+  "updated_utc": "2026-10-10T12:15:48Z",
   "session_id": "session_01P699BXuFxHTwsewFQmAveY",
   "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
   "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
@@ -71,7 +71,21 @@
     "pr_create_exit_code": 1,
     "pr_create_exact_message": "HTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the CCR routes on api.github.com: GET /repos/{owner}/{repo}/pulls/{n}/ccr/review_threads, POST /repos/{owner}/{repo}/pulls/{n}/ccr/comments/{comment_id}/resolve (or /unresolve), PUT or DELETE /repos/{owner}/{repo}/pulls/{n}/ccr/auto_merge, POST /repos/{owner}/{repo}/pulls/{n}/ccr/ready_for_review, POST /repos/{owner}/{repo}/pulls/{n}/ccr/convert_to_draft. (https://api.github.com/graphql)\nerror: Insufficient permissions for this action\ncode: FORBIDDEN",
     "pr_list_same_error": true,
-    "interpretation": "observed: the session's GitHub proxy returns 403 for the GraphQL endpoint that gh (and therefore gh-axi) uses for pr create and pr list. inferred: the failure happened at gh's GraphQL pre-check, so no PR was created; this could not be confirmed because pr list fails the same way. This is a proxy/permission restriction, not a credential prompt; no credentials were supplied or requested by me."
+    "interpretation": "observed: the session's GitHub proxy returns 403 for the GraphQL endpoint that gh (and therefore gh-axi) uses for pr create and pr list. inferred: the failure happened at gh's GraphQL pre-check, so no PR was created; this could not be confirmed because pr list fails the same way. This is a proxy/permission restriction, not a credential prompt; no credentials were supplied or requested by me.",
+    "rest_follow_up": {
+      "instruction_received_utc": "2026-10-10T12:15:40Z",
+      "instruction_summary": "use gh-axi api (REST) to GET existing PRs for the head, then POST /repos/kesk-git/cloud/pulls with a repo-local JSON input; stop if REST refuses",
+      "duplicate_check": {
+        "first_attempt": "gh-axi api 'GET /repos/kesk-git/cloud/pulls?head=...&state=all' refused: 'gh: This GitHub API path is not available: sessions are bound to their configured repositories. Use repository-scoped endpoints (repos/{owner}/{repo}/...). (HTTP 403)' (inferred: the query string broke the proxy path match)",
+        "second_attempt": "gh-axi api repos/kesk-git/cloud/pulls --field state=all --field head=kesk-git:claude/cloud-delivery-brief-rdpn8x returned [] (no existing PR), exit 0, 2026-10-10T12:15:40Z"
+      },
+      "create": {
+        "command": "gh-axi api POST repos/kesk-git/cloud/pulls --input .fleet/tools/pr-create.json --full",
+        "input_file": ".fleet/tools/pr-create.json (repo-local, excluded from git; fields title, head, base, body)",
+        "exit_code": 0,
+        "result": "HTTP success; number 1, state open, title 'Add optional --name to --smoke', created_at 2026-10-10T12:15:48Z, html_url https://github.com/kesk-git/Cloud/pull/1, api url https://api.github.com/repos/kesk-git/Cloud/pulls/1, author kesk-git (existing proxy credential; none supplied by me)"
+      }
+    }
   },
   "implementation": {
     "state": "done",
@@ -93,10 +107,23 @@
       "--smoke --name": "exit 1, 'usage: cloud-stub --smoke [--name NAME]'"
     }
   },
-  "pull_request": null,
-  "pr_body_prepared": "title 'Add optional --name to --smoke'; body includes summary, validation, and the full cloud session URL https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
-  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus this status update; ready for a PR to main",
-  "blockers": [
-    "PR not opened: gh-axi pr create fails with HTTP 403 because GitHub GraphQL is unavailable from this Claude Code session (exact message recorded under gh_axi). Per CLAUDE.md and the follow-up message, no substitute GitHub client (gh api REST, GitHub MCP tools) was used. Stopped here; the Mac supervisor can open the PR from the pushed branch."
+  "pull_request": {
+    "number": 1,
+    "url": "https://github.com/kesk-git/Cloud/pull/1",
+    "state": "open",
+    "base": "main",
+    "head": "claude/cloud-delivery-brief-rdpn8x",
+    "title": "Add optional --name to --smoke",
+    "created_utc": "2026-10-10T12:15:48Z",
+    "opened_with": "gh-axi 0.1.36 api subcommand (REST POST)",
+    "body_includes_session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
+    "merged": false,
+    "auto_merge": false
+  },
+  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus status updates; PR #1 open against main",
+  "blockers": [],
+  "resolved_blockers": [
+    "gh-axi absent at bootstrap: resolved by the permitted scoped npm install",
+    "gh-axi pr create refused (GraphQL 403): resolved by the permitted gh-axi api REST path"
   ]
 }
