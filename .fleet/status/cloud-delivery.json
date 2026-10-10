@@ -1,0 +1,62 @@
+{
+  "task_id": "cloud-delivery",
+  "status": "bootstrapped",
+  "sequence": 1,
+  "updated_utc": "2026-10-10T12:11:22Z",
+  "session_id": "session_01P699BXuFxHTwsewFQmAveY",
+  "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
+  "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
+  "source_revision": "scout/cloud-delivery-20261010",
+  "task_branch": "claude/cloud-delivery-brief-rdpn8x",
+  "markers": {
+    "repo_instructions": "repo-instructions-20261010",
+    "repo_skill": "repo-skill-20261010",
+    "repo_hook": "repo-hook-20261010",
+    "repo_settings": "repo-settings-20261010"
+  },
+  "bootstrap": {
+    "claude_md_read": true,
+    "delivery_probe_skill_loaded": true,
+    "session_start_probe_file_exists": true,
+    "session_start_probe_content": "repo-hook-20261010",
+    "fleet_settings_probe_env": "repo-settings-20261010",
+    "os": "Linux",
+    "architecture": "x86_64 (GOOS=linux GOARCH=amd64)",
+    "go_version": "go1.24.7 linux/amd64",
+    "gh_axi_available": false,
+    "subagents_created": false
+  },
+  "evidence_provenance": {
+    "observed": [
+      "source_sha from git rev-parse HEAD",
+      "task_branch from git status on the cloned repo",
+      "session_id from the claude-code-remote get_session tool",
+      "session_start.txt existence and content from reading the file",
+      "FLEET_SETTINGS_PROBE from the shell environment (only this variable was read)",
+      "os/architecture from uname -sm and go env",
+      "go_version from go version",
+      "gh_axi_available from command -v gh-axi (not found on PATH)"
+    ],
+    "inferred": [
+      "session_start.txt was written by the SessionStart hook in .claude/settings.json; the hook run itself was not observed",
+      "FLEET_SETTINGS_PROBE was injected from .claude/settings.json env; its source was not traced beyond the shell"
+    ]
+  },
+  "steering": {
+    "expected": true,
+    "received": true,
+    "marker": "steer-20261010-A",
+    "received_utc": "2026-10-10T12:11:22Z",
+    "instruction": "trim surrounding whitespace from --name before validation and rendering; whitespace-only names must fail; add tests for both cases; keep default smoke output unchanged",
+    "result": "received before implementation started; will be applied during implementation"
+  },
+  "implementation": {
+    "state": "not started",
+    "summary": "--name NAME option for --smoke pending"
+  },
+  "validation": {},
+  "pull_request": null,
+  "blockers": [
+    "gh-axi is not installed in the cloud environment; per CLAUDE.md no substitute GitHub client will be used to open the PR"
+  ]
+}
