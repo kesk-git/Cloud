@@ -1,8 +1,8 @@
 {
   "task_id": "cloud-delivery",
-  "status": "bootstrapped",
-  "sequence": 1,
-  "updated_utc": "2026-10-10T12:11:22Z",
+  "status": "implemented-validated",
+  "sequence": 2,
+  "updated_utc": "2026-10-10T12:12:12Z",
   "session_id": "session_01P699BXuFxHTwsewFQmAveY",
   "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
   "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
@@ -24,7 +24,9 @@
     "architecture": "x86_64 (GOOS=linux GOARCH=amd64)",
     "go_version": "go1.24.7 linux/amd64",
     "gh_axi_available": false,
-    "subagents_created": false
+    "subagents_created": false,
+    "bootstrap_commit": "f67a960",
+    "bootstrap_pushed_utc": "2026-10-10T12:11:22Z"
   },
   "evidence_provenance": {
     "observed": [
@@ -35,7 +37,8 @@
       "FLEET_SETTINGS_PROBE from the shell environment (only this variable was read)",
       "os/architecture from uname -sm and go env",
       "go_version from go version",
-      "gh_axi_available from command -v gh-axi (not found on PATH)"
+      "gh_axi_available from command -v gh-axi (not found on PATH)",
+      "all validation results below from commands run in this session"
     ],
     "inferred": [
       "session_start.txt was written by the SessionStart hook in .claude/settings.json; the hook run itself was not observed",
@@ -48,15 +51,38 @@
     "marker": "steer-20261010-A",
     "received_utc": "2026-10-10T12:11:22Z",
     "instruction": "trim surrounding whitespace from --name before validation and rendering; whitespace-only names must fail; add tests for both cases; keep default smoke output unchanged",
-    "result": "received before implementation started; will be applied during implementation"
+    "result": "implemented: parseSmoke trims NAME with strings.TrimSpace before the empty check and before rendering; TestSmokeWithName covers padded names, TestSmokeRejectsEmptyName covers empty and whitespace-only names; default output unchanged (TestSmoke and executable check)"
   },
+  "additional_messages": [
+    {
+      "kind": "tool-prerequisite-follow-up",
+      "received_utc": "2026-10-10T12:12:12Z",
+      "summary": "permits installing gh-axi@0.1.36 via npm into an ignored directory inside this clone (.fleet/tools) with --no-save --ignore-scripts; supersedes only the install prohibition; no login, tokens, account changes or charges; stop and record the exact message if a credential is required",
+      "result": "pending"
+    }
+  ],
   "implementation": {
-    "state": "not started",
-    "summary": "--name NAME option for --smoke pending"
+    "state": "done",
+    "summary": "--smoke accepts optional --name NAME; output becomes 'cloud-stub: ok (NAME)'; NAME is whitespace-trimmed; empty/whitespace-only NAME, missing value, or extra/unknown arguments are rejected with exit 1",
+    "files": ["main.go", "main_test.go", "README.md"]
   },
-  "validation": {},
+  "validation": {
+    "platform": "linux/amd64 only; Windows and macOS checks were not run here and are left to the GitHub Actions matrix",
+    "gofmt_l": "no files listed",
+    "go_vet": "pass",
+    "go_test": "pass (TestSmoke, TestSmokeWithName, TestSmokeRejectsEmptyName, TestInvalidArguments)",
+    "go_build": "pass (dist/cloud-stub)",
+    "executable_smoke": {
+      "--smoke": "cloud-stub: ok",
+      "--smoke --name mac": "cloud-stub: ok (mac)",
+      "--smoke --name '  mac  '": "cloud-stub: ok (mac)",
+      "--smoke --name ''": "exit 1, 'cloud-stub: --name requires a nonempty name'",
+      "--smoke --name '   '": "exit 1",
+      "--smoke --name": "exit 1, 'usage: cloud-stub --smoke [--name NAME]'"
+    }
+  },
   "pull_request": null,
   "blockers": [
-    "gh-axi is not installed in the cloud environment; per CLAUDE.md no substitute GitHub client will be used to open the PR"
+    "gh-axi was absent at bootstrap; a follow-up message permits a scoped npm install, attempt pending"
   ]
 }
