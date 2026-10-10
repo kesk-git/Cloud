@@ -1,8 +1,8 @@
 {
   "task_id": "cloud-delivery",
-  "status": "implemented-validated",
-  "sequence": 2,
-  "updated_utc": "2026-10-10T12:12:12Z",
+  "status": "blocked-on-pr-creation",
+  "sequence": 3,
+  "updated_utc": "2026-10-10T12:13:23Z",
   "session_id": "session_01P699BXuFxHTwsewFQmAveY",
   "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
   "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
@@ -58,9 +58,21 @@
       "kind": "tool-prerequisite-follow-up",
       "received_utc": "2026-10-10T12:12:12Z",
       "summary": "permits installing gh-axi@0.1.36 via npm into an ignored directory inside this clone (.fleet/tools) with --no-save --ignore-scripts; supersedes only the install prohibition; no login, tokens, account changes or charges; stop and record the exact message if a credential is required",
-      "result": "pending"
+      "result": "gh-axi@0.1.36 installed with npm --prefix .fleet/tools install --no-save --ignore-scripts; .fleet/tools/ is excluded via .git/info/exclude and git tracks none of its files; no login, tokens, account changes or charges; gh-axi --version reports 0.1.36"
     }
   ],
+  "gh_axi": {
+    "installed": true,
+    "version": "0.1.36",
+    "path": ".fleet/tools/node_modules/.bin/gh-axi",
+    "wraps": "gh binary at /usr/local/bin/gh (preinstalled, proxy-configured)",
+    "pr_create_attempted_utc": "2026-10-10T12:13:23Z",
+    "pr_create_command": "gh-axi pr create -R kesk-git/cloud --base main --head claude/cloud-delivery-brief-rdpn8x --title 'Add optional --name to --smoke' --body-file <pr-body.md>",
+    "pr_create_exit_code": 1,
+    "pr_create_exact_message": "HTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the CCR routes on api.github.com: GET /repos/{owner}/{repo}/pulls/{n}/ccr/review_threads, POST /repos/{owner}/{repo}/pulls/{n}/ccr/comments/{comment_id}/resolve (or /unresolve), PUT or DELETE /repos/{owner}/{repo}/pulls/{n}/ccr/auto_merge, POST /repos/{owner}/{repo}/pulls/{n}/ccr/ready_for_review, POST /repos/{owner}/{repo}/pulls/{n}/ccr/convert_to_draft. (https://api.github.com/graphql)\nerror: Insufficient permissions for this action\ncode: FORBIDDEN",
+    "pr_list_same_error": true,
+    "interpretation": "observed: the session's GitHub proxy returns 403 for the GraphQL endpoint that gh (and therefore gh-axi) uses for pr create and pr list. inferred: the failure happened at gh's GraphQL pre-check, so no PR was created; this could not be confirmed because pr list fails the same way. This is a proxy/permission restriction, not a credential prompt; no credentials were supplied or requested by me."
+  },
   "implementation": {
     "state": "done",
     "summary": "--smoke accepts optional --name NAME; output becomes 'cloud-stub: ok (NAME)'; NAME is whitespace-trimmed; empty/whitespace-only NAME, missing value, or extra/unknown arguments are rejected with exit 1",
@@ -82,7 +94,9 @@
     }
   },
   "pull_request": null,
+  "pr_body_prepared": "title 'Add optional --name to --smoke'; body includes summary, validation, and the full cloud session URL https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
+  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus this status update; ready for a PR to main",
   "blockers": [
-    "gh-axi was absent at bootstrap; a follow-up message permits a scoped npm install, attempt pending"
+    "PR not opened: gh-axi pr create fails with HTTP 403 because GitHub GraphQL is unavailable from this Claude Code session (exact message recorded under gh_axi). Per CLAUDE.md and the follow-up message, no substitute GitHub client (gh api REST, GitHub MCP tools) was used. Stopped here; the Mac supervisor can open the PR from the pushed branch."
   ]
 }
