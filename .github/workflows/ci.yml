@@ -1,0 +1,34 @@
+name: cross-platform
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-smoke:
+    name: build-smoke (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.13'
+          cache: false
+      - name: Format
+        shell: bash
+        run: test -z "$(gofmt -l main.go main_test.go)"
+      - run: go vet ./...
+      - run: go test ./...
+      - run: go build -o dist/cloud-stub${{ runner.os == 'Windows' && '.exe' || '' }} .
+      - name: Native executable smoke test
+        shell: bash
+        run: test "$(./dist/cloud-stub${{ runner.os == 'Windows' && '.exe' || '' }} --smoke)" = 'cloud-stub: ok'
