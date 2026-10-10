@@ -1,8 +1,8 @@
 {
   "task_id": "cloud-delivery",
-  "status": "pr-open-awaiting-supervisor",
-  "sequence": 4,
-  "updated_utc": "2026-10-10T12:15:48Z",
+  "status": "pr-open-autofix-watching",
+  "sequence": 5,
+  "updated_utc": "2026-10-10T12:18:21Z",
   "session_id": "session_01P699BXuFxHTwsewFQmAveY",
   "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
   "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
@@ -120,7 +120,19 @@
     "merged": false,
     "auto_merge": false
   },
-  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus status updates; PR #1 open against main",
+  "autofix": {
+    "requested_utc": "2026-10-10T12:18:21Z",
+    "enabled": true,
+    "mechanism": "native cloud session PR activity subscription (claude-code-remote subscribe_pr_activity tool) in this existing session; no polling, no local background loop, no new session",
+    "tool_call": "subscribe_pr_activity owner=kesk-git repo=cloud pullNumber=1",
+    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" …> envelopes.",
+    "requirements_encountered": "none: no GitHub App install, login, token, paid tier or account setting was requested",
+    "watching": ["failed checks", "review comments", "reviews", "CI status changes", "other PR events"],
+    "repo_skills_checked": "no .claude/skills/steward or .claude/skills/babysit on the head branch; only delivery-probe exists",
+    "posture": "idle until GitHub delivers an event; fixes will preserve the Actions gate assertions; no merge, no auto-merge, no account changes",
+    "events_received": []
+  },
+  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus status updates; PR #1 open against main; session subscribed to PR events",
   "blockers": [],
   "resolved_blockers": [
     "gh-axi absent at bootstrap: resolved by the permitted scoped npm install",
