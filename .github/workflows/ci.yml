@@ -31,4 +31,5 @@ jobs:
       - run: go build -o dist/cloud-stub${{ runner.os == 'Windows' && '.exe' || '' }} .
       - name: Native executable smoke test
         shell: bash
-        run: test "$(./dist/cloud-stub${{ runner.os == 'Windows' && '.exe' || '' }} --smoke)" = 'cloud-stub: ok'
+        run: |
+          test "$(./dist/cloud-stub${{ runner.os == 'Windows' && '.exe' || '' }} --smoke)" = 'cloud-stub: ok'
