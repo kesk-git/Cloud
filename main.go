@@ -10,6 +10,9 @@ import (
 
 const usage = "usage: cloud-stub --smoke [--name NAME]"
 
+// version is printed by "--version" as "cloud-stub <version>".
+const version = "0.2.0"
+
 // parseSmoke validates the command line and returns the optional smoke name.
 // Accepted forms are "--smoke" and "--smoke --name NAME". NAME has its
 // surrounding whitespace trimmed; an empty or whitespace-only NAME is an error.
@@ -35,6 +38,10 @@ func parseSmoke(args []string) (string, error) {
 }
 
 func run(out io.Writer, args []string) error {
+	if len(args) == 1 && args[0] == "--version" {
+		_, err := fmt.Fprintln(out, "cloud-stub "+version)
+		return err
+	}
 	name, err := parseSmoke(args)
 	if err != nil {
 		return err

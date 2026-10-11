@@ -21,6 +21,16 @@ func TestRunReturnsWriterError(t *testing.T) {
 	}
 }
 
+func TestVersion(t *testing.T) {
+	var out bytes.Buffer
+	if err := run(&out, []string{"--version"}); err != nil {
+		t.Fatal(err)
+	}
+	if got := out.String(); got != "cloud-stub 0.2.0\n" {
+		t.Fatalf("unexpected version output: %q", got)
+	}
+}
+
 func TestSmoke(t *testing.T) {
 	var out bytes.Buffer
 	if err := run(&out, []string{"--smoke"}); err != nil {
