@@ -90,7 +90,11 @@
   "implementation": {
     "state": "done",
     "summary": "--smoke accepts optional --name NAME; output becomes 'cloud-stub: ok (NAME)'; NAME is whitespace-trimmed; empty/whitespace-only NAME, missing value, or extra/unknown arguments are rejected with exit 1",
-    "files": ["main.go", "main_test.go", "README.md"]
+    "files": [
+      "main.go",
+      "main_test.go",
+      "README.md"
+    ]
   },
   "validation": {
     "platform": "linux/amd64 only; Windows and macOS checks were not run here and are left to the GitHub Actions matrix",
@@ -125,9 +129,15 @@
     "enabled": true,
     "mechanism": "native cloud session PR activity subscription (claude-code-remote subscribe_pr_activity tool) in this existing session; no polling, no local background loop, no new session",
     "tool_call": "subscribe_pr_activity owner=kesk-git repo=cloud pullNumber=1",
-    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" …> envelopes.",
+    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" \u2026> envelopes.",
     "requirements_encountered": "none: no GitHub App install, login, token, paid tier or account setting was requested",
-    "watching": ["failed checks", "review comments", "reviews", "CI status changes", "other PR events"],
+    "watching": [
+      "failed checks",
+      "review comments",
+      "reviews",
+      "CI status changes",
+      "other PR events"
+    ],
     "repo_skills_checked": "no .claude/skills/steward or .claude/skills/babysit on the head branch; only delivery-probe exists",
     "posture": "idle until GitHub delivers an event; fixes will preserve the Actions gate assertions; no merge, no auto-merge, no account changes",
     "events_received": [
@@ -213,6 +223,41 @@
     "inferred": [
       "session_start.txt was written by the SessionStart hook in .claude/settings.json; the hook run was not observed",
       "FLEET_SETTINGS_PROBE comes from .claude/settings.json env; its source was not traced"
+    ]
+  },
+  "cloud_20261011_cloud_stub_version_flag": {
+    "markers_recorded": [
+      "repo-skill-20261010",
+      "repo-instructions-20261010"
+    ],
+    "timestamp_utc": "2026-10-11T10:57:32Z",
+    "commit_sha": "47b8e654ebd53f06149f312390cd41e82940fa2b",
+    "os_arch": "Linux x86_64 (GOOS=linux GOARCH=amd64)",
+    "go_version": "go1.24.7 linux/amd64",
+    "session_id": "session_01DcLAfCQuonLoebowjdNskx",
+    "session_url": "https://claude.ai/code/session_01DcLAfCQuonLoebowjdNskx",
+    "session_kind": "Claude cloud session (anthropic_cloud environment)",
+    "source_revision": "fm/fm-cloud-pilot-version-flag",
+    "task_branch": "claude/cloud-stub-version-flag-kev28v",
+    "session_start_probe_file_exists": true,
+    "session_start_probe_content": "repo-hook-20261010",
+    "fleet_settings_probe_env": "repo-settings-20261010",
+    "gh_axi_available": false,
+    "subagents_created": false,
+    "observed": [
+      "commit_sha (git rev-parse HEAD)",
+      "os_arch (uname -sm and go env GOOS GOARCH)",
+      "go_version (go version)",
+      "timestamp (date -u)",
+      "session_start.txt existence and content (test -f and cat)",
+      "FLEET_SETTINGS_PROBE (only this variable read from the shell)",
+      "session_id and session_kind (claude-code-remote get_session tool)",
+      "gh_axi_available (command -v gh-axi: not found on PATH)",
+      "task_branch (git status)"
+    ],
+    "inferred": [
+      "session_start.txt was written by the SessionStart hook in .claude/settings.json; the hook run itself was not observed",
+      "FLEET_SETTINGS_PROBE comes from .claude/settings.json env; its source was not traced beyond the shell"
     ]
   }
 }
