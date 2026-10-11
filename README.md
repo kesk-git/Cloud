@@ -14,6 +14,8 @@ The smoke check accepts an optional `--name NAME`. Surrounding whitespace is
 trimmed from NAME; an empty or whitespace-only NAME, a missing value, or any
 other argument is rejected with exit status 1.
 
+Running the executable with `--version` prints `cloud-stub 0.2.0` and exits 0.
+
 ```
 $ dist/cloud-stub --smoke
 cloud-stub: ok
