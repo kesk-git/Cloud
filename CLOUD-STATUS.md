@@ -24,3 +24,9 @@
 - ExitWorktree (deferred)
 
 (d) Permission mode: not stated to me; as far as I can tell, a non-interactive/auto-approving remote mode (tool calls ran without prompts).
+
+Instruction marker: repo-instructions-20261010
+delivery-probe skill loaded (marker repo-skill-20261010). Its request to write .fleet/status/cloud-delivery.json was NOT done: the task restricts changes to .claude/settings.json and CLOUD-STATUS.md.
+
+Checks (Linux only): gofmt clean, go vet ok, go test ok, compiled executable built. gh-axi not found (prerequisite absent; no other GitHub client used). Windows/macOS not checked.
+done fm/cloud-teardown-test-1
