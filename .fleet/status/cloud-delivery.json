@@ -1,13 +1,13 @@
 {
   "task_id": "cloud-delivery",
-  "status": "pr-open-autofix-review-addressed",
-  "sequence": 8,
-  "updated_utc": "2026-10-10T12:22:30Z",
-  "session_id": "session_01P699BXuFxHTwsewFQmAveY",
-  "session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
-  "source_sha": "04fd17fb2cbf502b4bd80d91c2fe97f66e03a9c2",
-  "source_revision": "scout/cloud-delivery-20261010",
-  "task_branch": "claude/cloud-delivery-brief-rdpn8x",
+  "task": "model-probe-baseline-noflag",
+  "status": "probe-recorded",
+  "updated_utc": "2026-10-12T05:40:34Z",
+  "session_id": "session_01StDephh5Sz8KTeh516Xd94",
+  "session_url": "https://claude.ai/code/session_01StDephh5Sz8KTeh516Xd94",
+  "source_sha": "2c59bb82f25c0c931e55d7adbf858c746e1f790e",
+  "task_branch": "claude/model-probe-baseline-noflag-gqynbu",
+  "previous_record": "the prior cloud-delivery task record (PR #1, session_01P699BXuFxHTwsewFQmAveY) is preserved in git history at 2c59bb8 and was replaced by this record",
   "markers": {
     "repo_instructions": "repo-instructions-20261010",
     "repo_skill": "repo-skill-20261010",
@@ -21,170 +21,54 @@
     "session_start_probe_content": "repo-hook-20261010",
     "fleet_settings_probe_env": "repo-settings-20261010",
     "os": "Linux",
-    "architecture": "x86_64 (GOOS=linux GOARCH=amd64)",
+    "architecture": "x86_64 (go: linux/amd64)",
     "go_version": "go1.24.7 linux/amd64",
     "gh_axi_available": false,
-    "subagents_created": false,
-    "bootstrap_commit": "f67a960",
-    "bootstrap_pushed_utc": "2026-10-10T12:11:22Z"
+    "subagents_created": false
+  },
+  "model_probe": {
+    "label": "baseline-noflag",
+    "system_prompt_sentence": "You are powered by the model named Fable 5.1. The exact model ID is claude-fable-5-1.",
+    "model_name": "Fable 5.1",
+    "model_id": "claude-fable-5-1",
+    "get_session_configured_model": "claude-fable-5-1",
+    "get_session_session_context_model": "claude-fable-5-1",
+    "get_session_last_served_model": "claude-fable-5-1",
+    "probe_file": ".scout/model-probe.txt",
+    "probe_line": "2026-10-12T05:40:34Z label=baseline-noflag session=session_01StDephh5Sz8KTeh516Xd94 model_id=claude-fable-5-1 model_name=Fable 5.1"
+  },
+  "validation": {
+    "platform": "linux/amd64 only; Windows and macOS checks were not run here",
+    "gofmt_l": "no files listed",
+    "go_vet": "pass",
+    "go_test": "pass",
+    "go_build": "pass",
+    "executable_smoke": "--smoke printed 'cloud-stub: ok', exit 0",
+    "note": "no Go source files were changed by this task"
   },
   "evidence_provenance": {
     "observed": [
+      "updated_utc from date -u +%FT%TZ in the session shell",
       "source_sha from git rev-parse HEAD",
-      "task_branch from git status on the cloned repo",
-      "session_id from the claude-code-remote get_session tool",
-      "session_start.txt existence and content from reading the file",
+      "task_branch from git rev-parse --abbrev-ref HEAD (branch pre-created by the harness)",
+      "session_id, configured_model, session_context.model and last_served_model from the claude-code-remote get_session tool",
+      "system_prompt_sentence quoted verbatim from this session's system prompt",
+      "session_start.txt existence and content from ls and cat of .fleet/probes/session-start.txt",
       "FLEET_SETTINGS_PROBE from the shell environment (only this variable was read)",
-      "os/architecture from uname -sm and go env",
+      "os/architecture from uname -sm and go version",
       "go_version from go version",
-      "gh_axi_available from command -v gh-axi (not found on PATH)",
-      "all validation results below from commands run in this session"
+      "gh_axi_available from which gh-axi (not found on PATH)",
+      "validation results from commands run in this session"
     ],
     "inferred": [
-      "session_start.txt was written by the SessionStart hook in .claude/settings.json; the hook run itself was not observed",
-      "FLEET_SETTINGS_PROBE was injected from .claude/settings.json env; its source was not traced beyond the shell"
+      "session_start.txt was written by the SessionStart hook configured in .claude/settings.json; the hook run itself was not observed",
+      "FLEET_SETTINGS_PROBE was injected from .claude/settings.json env; its source was not traced beyond the shell",
+      "the -gqynbu suffix on the branch name was added by the harness; the task asked for claude/model-probe-baseline-noflag"
     ]
   },
-  "steering": {
-    "expected": true,
-    "received": true,
-    "marker": "steer-20261010-A",
-    "received_utc": "2026-10-10T12:11:22Z",
-    "instruction": "trim surrounding whitespace from --name before validation and rendering; whitespace-only names must fail; add tests for both cases; keep default smoke output unchanged",
-    "result": "implemented: parseSmoke trims NAME with strings.TrimSpace before the empty check and before rendering; TestSmokeWithName covers padded names, TestSmokeRejectsEmptyName covers empty and whitespace-only names; default output unchanged (TestSmoke and executable check)"
-  },
-  "additional_messages": [
-    {
-      "kind": "tool-prerequisite-follow-up",
-      "received_utc": "2026-10-10T12:12:12Z",
-      "summary": "permits installing gh-axi@0.1.36 via npm into an ignored directory inside this clone (.fleet/tools) with --no-save --ignore-scripts; supersedes only the install prohibition; no login, tokens, account changes or charges; stop and record the exact message if a credential is required",
-      "result": "gh-axi@0.1.36 installed with npm --prefix .fleet/tools install --no-save --ignore-scripts; .fleet/tools/ is excluded via .git/info/exclude and git tracks none of its files; no login, tokens, account changes or charges; gh-axi --version reports 0.1.36"
-    }
-  ],
-  "gh_axi": {
-    "installed": true,
-    "version": "0.1.36",
-    "path": ".fleet/tools/node_modules/.bin/gh-axi",
-    "wraps": "gh binary at /usr/local/bin/gh (preinstalled, proxy-configured)",
-    "pr_create_attempted_utc": "2026-10-10T12:13:23Z",
-    "pr_create_command": "gh-axi pr create -R kesk-git/cloud --base main --head claude/cloud-delivery-brief-rdpn8x --title 'Add optional --name to --smoke' --body-file <pr-body.md>",
-    "pr_create_exit_code": 1,
-    "pr_create_exact_message": "HTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the CCR routes on api.github.com: GET /repos/{owner}/{repo}/pulls/{n}/ccr/review_threads, POST /repos/{owner}/{repo}/pulls/{n}/ccr/comments/{comment_id}/resolve (or /unresolve), PUT or DELETE /repos/{owner}/{repo}/pulls/{n}/ccr/auto_merge, POST /repos/{owner}/{repo}/pulls/{n}/ccr/ready_for_review, POST /repos/{owner}/{repo}/pulls/{n}/ccr/convert_to_draft. (https://api.github.com/graphql)\nerror: Insufficient permissions for this action\ncode: FORBIDDEN",
-    "pr_list_same_error": true,
-    "interpretation": "observed: the session's GitHub proxy returns 403 for the GraphQL endpoint that gh (and therefore gh-axi) uses for pr create and pr list. inferred: the failure happened at gh's GraphQL pre-check, so no PR was created; this could not be confirmed because pr list fails the same way. This is a proxy/permission restriction, not a credential prompt; no credentials were supplied or requested by me.",
-    "rest_follow_up": {
-      "instruction_received_utc": "2026-10-10T12:15:40Z",
-      "instruction_summary": "use gh-axi api (REST) to GET existing PRs for the head, then POST /repos/kesk-git/cloud/pulls with a repo-local JSON input; stop if REST refuses",
-      "duplicate_check": {
-        "first_attempt": "gh-axi api 'GET /repos/kesk-git/cloud/pulls?head=...&state=all' refused: 'gh: This GitHub API path is not available: sessions are bound to their configured repositories. Use repository-scoped endpoints (repos/{owner}/{repo}/...). (HTTP 403)' (inferred: the query string broke the proxy path match)",
-        "second_attempt": "gh-axi api repos/kesk-git/cloud/pulls --field state=all --field head=kesk-git:claude/cloud-delivery-brief-rdpn8x returned [] (no existing PR), exit 0, 2026-10-10T12:15:40Z"
-      },
-      "create": {
-        "command": "gh-axi api POST repos/kesk-git/cloud/pulls --input .fleet/tools/pr-create.json --full",
-        "input_file": ".fleet/tools/pr-create.json (repo-local, excluded from git; fields title, head, base, body)",
-        "exit_code": 0,
-        "result": "HTTP success; number 1, state open, title 'Add optional --name to --smoke', created_at 2026-10-10T12:15:48Z, html_url https://github.com/kesk-git/Cloud/pull/1, api url https://api.github.com/repos/kesk-git/Cloud/pulls/1, author kesk-git (existing proxy credential; none supplied by me)"
-      }
-    }
-  },
-  "implementation": {
-    "state": "done",
-    "summary": "--smoke accepts optional --name NAME; output becomes 'cloud-stub: ok (NAME)'; NAME is whitespace-trimmed; empty/whitespace-only NAME, missing value, or extra/unknown arguments are rejected with exit 1",
-    "files": ["main.go", "main_test.go", "README.md"]
-  },
-  "validation": {
-    "platform": "linux/amd64 only; Windows and macOS checks were not run here and are left to the GitHub Actions matrix",
-    "gofmt_l": "no files listed",
-    "go_vet": "pass",
-    "go_test": "pass (TestSmoke, TestSmokeWithName, TestSmokeRejectsEmptyName, TestInvalidArguments)",
-    "go_build": "pass (dist/cloud-stub)",
-    "executable_smoke": {
-      "--smoke": "cloud-stub: ok",
-      "--smoke --name mac": "cloud-stub: ok (mac)",
-      "--smoke --name '  mac  '": "cloud-stub: ok (mac)",
-      "--smoke --name ''": "exit 1, 'cloud-stub: --name requires a nonempty name'",
-      "--smoke --name '   '": "exit 1",
-      "--smoke --name": "exit 1, 'usage: cloud-stub --smoke [--name NAME]'"
-    }
-  },
-  "pull_request": {
-    "number": 1,
-    "url": "https://github.com/kesk-git/Cloud/pull/1",
-    "state": "open",
-    "base": "main",
-    "head": "claude/cloud-delivery-brief-rdpn8x",
-    "title": "Add optional --name to --smoke",
-    "created_utc": "2026-10-10T12:15:48Z",
-    "opened_with": "gh-axi 0.1.36 api subcommand (REST POST)",
-    "body_includes_session_url": "https://claude.ai/code/session_01P699BXuFxHTwsewFQmAveY",
-    "merged": false,
-    "auto_merge": false
-  },
-  "autofix": {
-    "requested_utc": "2026-10-10T12:18:21Z",
-    "enabled": true,
-    "mechanism": "native cloud session PR activity subscription (claude-code-remote subscribe_pr_activity tool) in this existing session; no polling, no local background loop, no new session",
-    "tool_call": "subscribe_pr_activity owner=kesk-git repo=cloud pullNumber=1",
-    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" …> envelopes.",
-    "requirements_encountered": "none: no GitHub App install, login, token, paid tier or account setting was requested",
-    "watching": ["failed checks", "review comments", "reviews", "CI status changes", "other PR events"],
-    "repo_skills_checked": "no .claude/skills/steward or .claude/skills/babysit on the head branch; only delivery-probe exists",
-    "posture": "idle until GitHub delivers an event; fixes will preserve the Actions gate assertions; no merge, no auto-merge, no account changes",
-    "events_received": [
-      {
-        "kind": "subscription.created",
-        "received_utc": "2026-10-10T12:18:18Z",
-        "action": "read-only check via gh-axi REST: ubuntu green, windows/macos in progress, no comments; no push"
-      },
-      {
-        "kind": "check_suite.completed",
-        "received_utc": "2026-10-10T12:19:41Z",
-        "head_sha": "1e5e329742fa13a74140a976ccd36ef7b8568d1f",
-        "action": "verified via gh-axi REST: all three build-smoke jobs success; no push"
-      },
-      {
-        "kind": "check_run.completed",
-        "received_utc": "2026-10-10T12:19:55Z",
-        "check": "golden-smoke",
-        "check_run_id": 114211524097,
-        "conclusion": "failure",
-        "head_sha": "f4c4d972034c7d6430056babb4c7fb94d48c7c41",
-        "details_url": "https://github.com/kesk-git/Cloud/actions/runs/38051544644/job/114211524097",
-        "diagnosis": "observed: supervisor commit f4c4d97 'Exercise Auto-fix with deliberately incorrect smoke fixture' added .fleet/fixtures/smoke.txt containing 'cloud-stub: BROKEN' and .github/workflows/scout-contract.yml whose golden-smoke job diffs that fixture against 'go run . --smoke'. Reproduced locally: diff exit 1 with '-cloud-stub: BROKEN / +cloud-stub: ok'. Job logs could not be fetched (blob storage URL returned Forbidden through the proxy); diagnosis rests on the diff and local reproduction.",
-        "fix": "corrected .fleet/fixtures/smoke.txt to the documented golden contract 'cloud-stub: ok' (README and the cross-platform gate assert the same string). No workflow, gate assertion, or program output was changed. Local golden-smoke diff now exits 0.",
-        "validation": "gofmt clean, go vet pass, go test pass, go build pass, executable --smoke prints 'cloud-stub: ok', --smoke --name mac prints 'cloud-stub: ok (mac)'; .github unchanged",
-        "re_run": "not needed: fix pushed as a new commit, which triggers both workflows",
-        "result": "fix commit 1cbf1a7; all four checks on it (golden-smoke, build-smoke ubuntu/windows/macos) observed success via gh-axi REST"
-      },
-      {
-        "kind": "pull_request_review.submitted",
-        "received_utc": "2026-10-10T12:21:43Z",
-        "review_id": 5478916814,
-        "author": "kesk-git (OWNER)",
-        "state": "commented",
-        "body": "Cloud-delivery scout review: exercise the output error path without changing the command contract or gate."
-      },
-      {
-        "kind": "pull_request_review_comment.created",
-        "received_utc": "2026-10-10T12:21:43Z",
-        "comment_id": 4237591319,
-        "file": "main_test.go",
-        "line": 19,
-        "ask": "regression test for run returning an underlying writer error: sentinel-error writer, errors.Is for both --smoke and --smoke --name Scout; keep successful output and workflow assertions unchanged",
-        "assessment": "small, local, in scope; run already returns fmt.Fprintln's error unwrapped so errors.Is holds without a code change",
-        "fix": "added failWriter type and TestRunReturnsWriterError in main_test.go covering both invocations; main.go, README, fixtures and workflows unchanged",
-        "validation": "gofmt clean, go vet pass, go test pass including TestRunReturnsWriterError, go build pass, executable --smoke prints 'cloud-stub: ok', golden fixture diff exit 0, .github unchanged",
-        "fix_commit": "7b13531",
-        "thread_reply": "posted via gh-axi REST POST repos/kesk-git/cloud/pulls/1/comments/4237591319/replies: comment 4237593954, https://github.com/kesk-git/Cloud/pull/1#discussion_r4237593954",
-        "thread_resolved": "yes, via gh-axi REST POST repos/kesk-git/cloud/pulls/1/ccr/comments/4237591319/resolve (result: resolved true, comment_ids 4237591319,4237593954)",
-        "ci_on_fix": "queued/in progress at 2026-10-10T12:22Z; completion will arrive as a GitHub event"
-      }
-    ]
-  },
-  "branch_state": "claude/cloud-delivery-brief-rdpn8x pushed to origin; head carries implementation commit 471aa98 plus status updates; PR #1 open against main; session subscribed to PR events",
   "blockers": [],
-  "resolved_blockers": [
-    "gh-axi absent at bootstrap: resolved by the permitted scoped npm install",
-    "gh-axi pr create refused (GraphQL 403): resolved by the permitted gh-axi api REST path"
+  "notes": [
+    "gh-axi is absent on PATH; not needed for this task because only git push was required",
+    "no pull request was opened, main was not touched, no merge, no new agent or session, no settings or secrets changed"
   ]
 }
