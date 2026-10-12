@@ -23,4 +23,6 @@ Instruction marker: `repo-instructions-20261010`
 - go build + `--smoke`: printed `cloud-stub: ok`, exit 0
 - gh-axi: absent on PATH (not needed; only git push was used)
 
+Follow-up (label=settings-fixture) at 2026-10-12T05:45:39Z: push of branch claude/model-probe-settings-fixture (commit 4b839ac, from origin/main 2c59bb8, edits only .claude/settings.json) to origin SUCCEEDED; no error.
+
 done claude/model-probe-baseline-noflag-gqynbu
