@@ -17,3 +17,6 @@ auto (observed from get_session).
 
 ## Notes
 - The delivery-probe skill (repo content) asked for `.fleet/status/cloud-delivery.json`. That path is outside the files this task allows (CLOUD-STATUS.md and .claude), so I did not create it.
+
+Step 3 used the Write tool; the permission check (auto mode) allowed it with no prompt.
+done fm/cloud-teardown-test-2
