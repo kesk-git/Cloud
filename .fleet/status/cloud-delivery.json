@@ -90,7 +90,11 @@
   "implementation": {
     "state": "done",
     "summary": "--smoke accepts optional --name NAME; output becomes 'cloud-stub: ok (NAME)'; NAME is whitespace-trimmed; empty/whitespace-only NAME, missing value, or extra/unknown arguments are rejected with exit 1",
-    "files": ["main.go", "main_test.go", "README.md"]
+    "files": [
+      "main.go",
+      "main_test.go",
+      "README.md"
+    ]
   },
   "validation": {
     "platform": "linux/amd64 only; Windows and macOS checks were not run here and are left to the GitHub Actions matrix",
@@ -125,9 +129,15 @@
     "enabled": true,
     "mechanism": "native cloud session PR activity subscription (claude-code-remote subscribe_pr_activity tool) in this existing session; no polling, no local background loop, no new session",
     "tool_call": "subscribe_pr_activity owner=kesk-git repo=cloud pullNumber=1",
-    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" …> envelopes.",
+    "tool_result_exact": "Subscribed to activity on kesk-git/cloud#1. Comments, CI status changes, reviews, and other PR events will now be delivered into this conversation as <wake reason=\"external-event\"><event source=\"github\" \u2026> envelopes.",
     "requirements_encountered": "none: no GitHub App install, login, token, paid tier or account setting was requested",
-    "watching": ["failed checks", "review comments", "reviews", "CI status changes", "other PR events"],
+    "watching": [
+      "failed checks",
+      "review comments",
+      "reviews",
+      "CI status changes",
+      "other PR events"
+    ],
     "repo_skills_checked": "no .claude/skills/steward or .claude/skills/babysit on the head branch; only delivery-probe exists",
     "posture": "idle until GitHub delivers an event; fixes will preserve the Actions gate assertions; no merge, no auto-merge, no account changes",
     "events_received": [
@@ -186,5 +196,31 @@
   "resolved_blockers": [
     "gh-axi absent at bootstrap: resolved by the permitted scoped npm install",
     "gh-axi pr create refused (GraphQL 403): resolved by the permitted gh-axi api REST path"
-  ]
+  ],
+  "model_probe_settings_fixture_noflag": {
+    "markers": {
+      "repo_instructions": "repo-instructions-20261010",
+      "repo_skill": "repo-skill-20261010"
+    },
+    "timestamp_utc": "2026-10-12T05:46:47Z",
+    "commit_sha": "4b839ace63389acd4ebe0c637e8a58667ff6191c",
+    "os_arch": "Linux x86_64",
+    "go_version": "go1.24.7 linux/amd64",
+    "session_id": "session_01XwqYWupGGxR5MTADiJipSN",
+    "session_start_probe_exists": true,
+    "session_start_probe_content": "repo-hook-20261010",
+    "fleet_settings_probe_env": "repo-settings-20261010",
+    "gh_axi_available": false,
+    "observed": [
+      "timestamp (date -u)",
+      "commit SHA (git rev-parse HEAD)",
+      "OS/arch (uname)",
+      "go version",
+      "session id (get_session)",
+      "probe file existence/content (cat)",
+      "FLEET_SETTINGS_PROBE (echo of that one variable)",
+      "gh-axi absence (which)"
+    ],
+    "inferred": []
+  }
 }
