@@ -1,8 +1,22 @@
 {
   "task_id": "model-probe-alias-opus-xhigh",
-  "status": "bootstrap-recorded",
-  "sequence": 1,
-  "updated_utc": "2026-10-12T05:47:43Z",
+  "status": "done",
+  "sequence": 2,
+  "updated_utc": "2026-10-12T05:48:18Z",
+  "deliverables": [".scout/model-probe.txt (one line appended, force-added because .scout/ is gitignored)", "CLOUD-STATUS.md"],
+  "validation": {
+    "platform": "linux/amd64 only; Windows and macOS were not run",
+    "gofmt_l": "no files listed",
+    "go_vet": "pass",
+    "go_test": "pass",
+    "go_build": "pass",
+    "executable_smoke": {
+      "--smoke": "cloud-stub: ok",
+      "--smoke --name probe": "cloud-stub: ok (probe)",
+      "--version": "cloud-stub 0.2.0",
+      "golden_fixture": "matches .fleet/fixtures/smoke.txt"
+    }
+  },
   "session_id": "session_01LxLjd9cM472V8NVoPbRfeb",
   "session_url": "https://claude.ai/code/session_01LxLjd9cM472V8NVoPbRfeb",
   "launch_label": "alias-opus-xhigh",
