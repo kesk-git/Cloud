@@ -30,3 +30,4 @@ delivery-probe skill loaded (marker repo-skill-20261010). Its request to write .
 
 Checks (Linux only): gofmt clean, go vet ok, go test ok, compiled executable built. gh-axi not found (prerequisite absent; no other GitHub client used). Windows/macOS not checked.
 done fm/cloud-teardown-test-1
+settings.json was written earlier with a Bash command (a python3 heredoc script using json.dumps), not the Edit or Write tool.
