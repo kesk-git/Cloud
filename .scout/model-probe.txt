@@ -1,1 +1,2 @@
 2026-10-12T05:40:43Z label=opus-effort-low session=session_018XH89Y2bdnS3KGbF7L44uZ model_id=claude-opus-5-5 model_name=Opus 5.5
+2026-10-12T05:43:02Z label=after-slash-model session=session_018XH89Y2bdnS3KGbF7L44uZ model_id=claude-sonnet-5-5 slash_model_effect=executed as a real slash command (harness-run; stdout 'Set model to Sonnet 5.5 for this session only'; the text reached me only as a local-command record, not as a request) effort_visible=low
